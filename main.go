@@ -12,7 +12,7 @@ import (
 
 func main() {
 	var g errgroup.Group
-	filepath.WalkDir("../test", func(path string, d fs.DirEntry, err error) error {
+	filepath.WalkDir(".", func(path string, d fs.DirEntry, err error) error {
 		if err != nil {
 			return err
 		}
