@@ -6,9 +6,11 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"sync"
 )
 
 func main() {
+	var wg sync.WaitGroup
 	filepath.WalkDir("../test", func(path string, d fs.DirEntry, err error) error {
 		if err != nil {
 			return err
@@ -18,10 +20,15 @@ func main() {
 			if d.Name() == ".git" || d.Name() == "node_modules" {
 				return filepath.SkipDir
 			}
-			upGrade(path)
+			wg.Add(1)
+			go func() {
+				defer wg.Done()
+				upGrade(path)
+			}()
 		}
 		return nil
 	})
+	wg.Wait()
 }
 
 func upGrade(path string) {
