@@ -36,7 +36,7 @@ func main() {
 		return nil
 	})
 	if err := g.Wait(); err != nil {
-		fmt.Println(err)
+		fmt.Println("错误", err)
 	}
 }
 
@@ -46,19 +46,13 @@ func upGrade(path string) error {
 	joinGit := filepath.Join(path, ".git")
 	if isExist(joinGit) {
 		fmt.Println(colorBlue, path, "git pull 执行", colorReset)
-		err := runCmd(path, "git", "pull")
-		if err != nil {
-			return err
-		}
+		runCmd(path, "git", "pull")
 	}
 	// pnpm i
 	joinPnpm := filepath.Join(path, "pnpm-lock.yaml")
 	if isExist(joinPnpm) {
 		fmt.Println(colorBlue, path, "pnpm i 执行", colorReset)
-		err := runCmd(path, "pnpm", "i")
-		if err != nil {
-			return err
-		}
+		runCmd(path, "pnpm", "i")
 	}
 	return nil
 }
@@ -66,10 +60,7 @@ func upGrade(path string) error {
 func runCmd(dir, name, args string) error {
 	cmd := exec.Command(name, args)
 	cmd.Dir = dir
-	out, err := cmd.CombinedOutput()
-	if err != nil {
-		return err
-	}
+	out, _ := cmd.CombinedOutput()
 	fmt.Println(colorGreen, dir, name, args, "完成", colorReset)
 	fmt.Println(string(out))
 	return nil
