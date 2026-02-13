@@ -41,17 +41,17 @@ func main() {
 }
 
 func upGrade(path string) error {
-	fmt.Println(colorPurple, path, "尝试目录", colorReset)
+	fmt.Println(colorPurple, "尝试", path, colorReset)
 	// git pull
 	joinGit := filepath.Join(path, ".git")
 	if isExist(joinGit) {
-		fmt.Println(colorBlue, path, "git pull 执行", colorReset)
+		fmt.Println(colorBlue, "执行", path, "git pull", colorReset)
 		runCmd(path, "git", "pull")
 	}
 	// pnpm i
 	joinPnpm := filepath.Join(path, "pnpm-lock.yaml")
 	if isExist(joinPnpm) {
-		fmt.Println(colorBlue, path, "pnpm i 执行", colorReset)
+		fmt.Println(colorBlue, "执行", path, "pnpm i", colorReset)
 		runCmd(path, "pnpm", "i")
 	}
 	return nil
@@ -61,7 +61,7 @@ func runCmd(dir, name, args string) error {
 	cmd := exec.Command(name, args)
 	cmd.Dir = dir
 	out, err := cmd.CombinedOutput()
-	fmt.Println(colorGreen, dir, name, args, "完成", colorReset)
+	fmt.Println(colorGreen, "完成", dir, name, args, colorReset)
 	if err != nil {
 		fmt.Println(colorRed, string(out), colorReset)
 	} else {
