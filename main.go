@@ -60,9 +60,13 @@ func upGrade(path string) error {
 func runCmd(dir, name, args string) error {
 	cmd := exec.Command(name, args)
 	cmd.Dir = dir
-	out, _ := cmd.CombinedOutput()
+	out, err := cmd.CombinedOutput()
 	fmt.Println(colorGreen, dir, name, args, "完成", colorReset)
-	fmt.Println(string(out))
+	if err != nil {
+		fmt.Println(colorRed, string(out), colorReset)
+	} else {
+		fmt.Println(string(out))
+	}
 	return nil
 }
 
@@ -75,3 +79,4 @@ var colorReset = "\033[0m"
 var colorGreen = "\033[30;42m"
 var colorBlue = "\033[97;44m"
 var colorPurple = "\033[97;45m"
+var colorRed = "\033[97;41m"
