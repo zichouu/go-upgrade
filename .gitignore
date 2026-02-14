@@ -1,2 +1,2 @@
-go-upgrade*
+cmd/upgrade/upgrade*
 dist

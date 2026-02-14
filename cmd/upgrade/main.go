@@ -25,7 +25,7 @@ func main() {
 				return filepath.SkipDir
 			}
 			g.Go(func() error {
-				err := upGrade(path)
+				err := run(path)
 				if err != nil {
 					return err
 				}

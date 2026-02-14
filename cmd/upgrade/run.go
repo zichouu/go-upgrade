@@ -12,7 +12,7 @@ import (
 
 var g errgroup.Group
 
-func upGrade(path string) error {
+func run(path string) error {
 	fmt.Println(color.BGPurple, "尝试", path, color.Reset)
 	// git pull
 	joinGit := filepath.Join(path, ".git")
