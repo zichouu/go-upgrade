@@ -1,9 +1,13 @@
 set CGO_ENABLED=0
 
-set GOOS=windows
+set GOOS=linux
 set GOARCH=amd64
-go build -trimpath -ldflags "-s -w" -o dist/windows-amd64/upgrade.exe
+go build -trimpath -ldflags "-s -w" -o build/linux-amd64/ ./...
 
 set GOOS=linux
 set GOARCH=arm64
-go build -trimpath -ldflags "-s -w" -o dist/linux-arm64/upgrade
+go build -trimpath -ldflags "-s -w" -o build/linux-arm64/ ./...
+
+set GOOS=windows
+set GOARCH=amd64
+go build -trimpath -ldflags "-s -w" -o build/windows-amd64/ ./...
