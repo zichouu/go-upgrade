@@ -6,6 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/zichouu/go-upgrade/pkg/exist"
 	"golang.org/x/sync/errgroup"
 )
 
@@ -20,7 +21,7 @@ func main() {
 			return err
 		}
 		if d.IsDir() {
-			// 跳过某些目录
+			// run() 前跳过某些目录 确定是无效目录
 			if d.Name() == ".git" || d.Name() == "node_modules" {
 				return filepath.SkipDir
 			}
@@ -31,6 +32,11 @@ func main() {
 				}
 				return nil
 			})
+			// run() 后 检测目录是否存在 .git 并跳过
+			joinGit := filepath.Join(path, ".git")
+			if exist.Bool(joinGit) {
+				return filepath.SkipDir
+			}
 		}
 		return nil
 	})
