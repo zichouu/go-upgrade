@@ -40,4 +40,5 @@ func main() {
 	if err := g.Wait(); err != nil {
 		fmt.Println("错误", err)
 	}
+	up()
 }

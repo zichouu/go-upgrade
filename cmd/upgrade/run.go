@@ -21,7 +21,10 @@ func run(path string) error {
 	})
 	// pnpm outdated
 	g.Go(func() error {
-		execpint.File(path, "pnpm-lock.yaml", "pnpm", "outdated")
+		err := execpint.File(path, "pnpm-lock.yaml", "pnpm", "outdated")
+		if err != nil {
+			errPath = append(errPath, path)
+		}
 		return nil
 	})
 	g.Wait()
