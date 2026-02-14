@@ -8,7 +8,10 @@ import (
 
 	"github.com/zichouu/go-upgrade/pkg/color"
 	"github.com/zichouu/go-upgrade/pkg/exist"
+	"golang.org/x/sync/errgroup"
 )
+
+var g errgroup.Group
 
 func upGrade(path string) error {
 	fmt.Println(color.Purple, "尝试", path, color.Reset)
@@ -22,7 +25,16 @@ func upGrade(path string) error {
 	joinPnpm := filepath.Join(path, "pnpm-lock.yaml")
 	if exist.Bool(joinPnpm) {
 		fmt.Println(color.Blue, "执行", path, "pnpm i", color.Reset)
-		runCmd(path, "pnpm", "i")
+		g.Go(func() error {
+			err := runCmd(path, "pnpm", "i")
+			return err
+		})
+		fmt.Println(color.Blue, "执行", path, "pnpm outdated", color.Reset)
+		g.Go(func() error {
+			err := runCmd(path, "pnpm", "outdated")
+			return err
+		})
+		g.Wait()
 	}
 	return nil
 }
