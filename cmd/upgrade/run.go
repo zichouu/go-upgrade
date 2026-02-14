@@ -18,5 +18,6 @@ func run(path string) error {
 	if err != nil {
 		errPath = append(errPath, path)
 	}
+	up()
 	return nil
 }
