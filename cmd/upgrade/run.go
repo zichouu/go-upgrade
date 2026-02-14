@@ -25,13 +25,13 @@ func run(path string) error {
 	if exist.Bool(joinPnpm) {
 		fmt.Println(color.BGBlue, "执行", path, "pnpm i", color.Reset)
 		g.Go(func() error {
-			err := execpint.Run(path, "pnpm", "i")
-			return err
+			execpint.Run(path, "pnpm", "i")
+			return nil
 		})
 		fmt.Println(color.BGBlue, "执行", path, "pnpm outdated", color.Reset)
 		g.Go(func() error {
-			err := execpint.Run(path, "pnpm", "outdated")
-			return err
+			execpint.Run(path, "pnpm", "outdated")
+			return nil
 		})
 		g.Wait()
 	}
