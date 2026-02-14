@@ -27,10 +27,7 @@ func main() {
 			}
 			g.Go(func() error {
 				err := run(path)
-				if err != nil {
-					return err
-				}
-				return nil
+				return err
 			})
 			// run() 后 检测目录是否存在 .git 并跳过
 			joinGit := filepath.Join(path, ".git")
