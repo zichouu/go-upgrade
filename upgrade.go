@@ -45,7 +45,7 @@ func runCmd(dir string, name string, args ...string) error {
 	out, err := cmd.CombinedOutput()
 	fmt.Println(color.BGGreen, "完成", dir, name, strings.Join(args, " "), color.Reset)
 	if err != nil {
-		fmt.Println(color.BGRed, string(out), color.Reset)
+		fmt.Println(color.Red, string(out), color.Reset)
 	} else {
 		fmt.Println(string(out))
 	}
