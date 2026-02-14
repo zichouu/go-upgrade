@@ -18,6 +18,7 @@ func run(path string) error {
 	if err != nil {
 		errPath = append(errPath, path)
 	}
+	// pnpm up --latest
 	up()
 	return nil
 }
