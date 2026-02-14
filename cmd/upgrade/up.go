@@ -13,8 +13,8 @@ var errPath []string
 func up() {
 	var g errgroup.Group
 	up := false
-	fmt.Println(errPath)
 	if len(errPath) > 0 {
+		fmt.Println(errPath)
 		huh.NewConfirm().
 			Title("pnpm up --latest ?").
 			Value(&up).
