@@ -23,7 +23,7 @@ func up() {
 	if up {
 		for _, value := range errPath {
 			g.Go(func() error {
-				execpint.Run(value, "pnpm", "up", "--latest")
+				execpint.Run(value, "pnpm up --latest")
 				return nil
 			})
 		}
