@@ -2,12 +2,12 @@ package execpint
 
 import (
 	"fmt"
+	"os"
 	"os/exec"
 	"path/filepath"
 	"runtime"
 
 	"github.com/zichouu/go-upgrade/pkg/color"
-	"github.com/zichouu/go-upgrade/pkg/exist"
 )
 
 func Run(dir string, command string) error {
@@ -34,7 +34,8 @@ func Run(dir string, command string) error {
 
 func File(path string, filename string, command string) error {
 	join := filepath.Join(path, filename)
-	if exist.Bool(join) {
+	_, err := os.Stat(join)
+	if err == nil {
 		err := Run(path, command)
 		return err
 	}
