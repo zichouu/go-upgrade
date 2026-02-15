@@ -32,7 +32,7 @@ func Run(dir string, command string) error {
 	return err
 }
 
-func File(path string, filename string, command string) error {
+func IfExist(path string, filename string, command string) error {
 	join := filepath.Join(path, filename)
 	_, err := os.Stat(join)
 	if err == nil {
