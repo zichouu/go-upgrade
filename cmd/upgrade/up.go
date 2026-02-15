@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/charmbracelet/huh"
-	"github.com/zichouu/go-upgrade/pkg/execpint"
+	"github.com/zichouu/go-upgrade/pkg/exe"
 	"golang.org/x/sync/errgroup"
 )
 
@@ -25,7 +25,7 @@ func up() {
 	if len(upPath) > 0 && upErr {
 		for _, value := range upPath {
 			g.Go(func() error {
-				execpint.Run(value, "pnpm up --latest")
+				exe.Run(value, "pnpm up --latest")
 				return nil
 			})
 		}

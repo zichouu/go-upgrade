@@ -1,4 +1,4 @@
-package execpint
+package exe
 
 import (
 	"fmt"
