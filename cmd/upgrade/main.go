@@ -11,6 +11,7 @@ import (
 )
 
 func main() {
+	check()
 	var g errgroup.Group
 	args := "."
 	if len(os.Args) >= 2 {
@@ -41,5 +42,7 @@ func main() {
 		fmt.Println("错误", err)
 	}
 	// pnpm up --latest
-	up()
+	if PathPnpm {
+		up()
+	}
 }
