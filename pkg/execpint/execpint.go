@@ -20,6 +20,9 @@ func Run(dir string, name string, args ...string) error {
 		errColor = color.BGRed
 	}
 	fmt.Println(errColor, "完成", dir, name, strings.Join(args, " "), color.Reset)
+	if err != nil {
+		fmt.Println(err)
+	}
 	fmt.Println(string(out))
 	return err
 }
