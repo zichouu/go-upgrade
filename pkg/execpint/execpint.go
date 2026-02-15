@@ -19,7 +19,7 @@ func Run(dir string, command string) error {
 	}
 	cmd.Dir = dir
 	errColor := color.BGGreen
-	fmt.Println(color.BGBlue, "执行", command, color.Reset)
+	fmt.Println(color.BGBlue, "执行", dir, command, color.Reset)
 	out, err := cmd.CombinedOutput()
 	if err != nil {
 		errColor = color.BGRed
