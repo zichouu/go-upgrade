@@ -7,11 +7,19 @@ import (
 	"path/filepath"
 	"slices"
 
+	"github.com/zichouu/go-pkg/check"
 	"golang.org/x/sync/errgroup"
 )
 
+var CanUseList = []string{}
+
 func main() {
-	check()
+	out, err := check.Path([]string{"git", "pnpm"})
+	if err != nil {
+		os.Exit(1)
+	} else {
+		CanUseList = out
+	}
 	root := "."
 	if len(os.Args) >= 2 {
 		root = os.Args[1]
