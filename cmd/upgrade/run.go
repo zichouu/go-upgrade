@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/zichouu/go-upgrade/pkg/color"
-	"github.com/zichouu/go-upgrade/pkg/exe"
+	"github.com/zichouu/go-pkg/color"
+	"github.com/zichouu/go-pkg/exe"
 )
 
 func run(path string) error {

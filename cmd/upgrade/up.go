@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/charmbracelet/huh"
-	"github.com/zichouu/go-upgrade/pkg/exe"
+	"github.com/zichouu/go-pkg/exe"
 	"golang.org/x/sync/errgroup"
 )
 

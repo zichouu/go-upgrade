@@ -5,7 +5,7 @@ import (
 	"os"
 	"os/exec"
 
-	"github.com/zichouu/go-upgrade/pkg/color"
+	"github.com/zichouu/go-pkg/color"
 )
 
 var PathGit = true
