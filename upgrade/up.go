@@ -25,7 +25,7 @@ func up() {
 	if len(upPath) > 0 && upErr {
 		for _, value := range upPath {
 			g.Go(func() error {
-				exe.Run(value, "pnpm up --latest", []string{})
+				exe.Run(value, []string{}, "pnpm", "up", "--latest")
 				return nil
 			})
 		}

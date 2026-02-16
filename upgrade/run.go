@@ -11,13 +11,13 @@ func run(path string) error {
 	fmt.Println(color.BgPurple, "尝试", path, color.Reset)
 	if PathGit {
 		// git pull
-		exe.IfExist(path, ".git", "git pull", []string{})
+		exe.IfExist(path, ".git", []string{}, "git", "pull")
 	}
 	if PathPnpm {
 		// pnpm i
-		exe.IfExist(path, "pnpm-lock.yaml", "pnpm i", []string{})
+		exe.IfExist(path, "pnpm-lock.yaml", []string{}, "pnpm", "i")
 		// pnpm outdated
-		err := exe.IfExist(path, "pnpm-lock.yaml", "pnpm outdated", []string{})
+		err := exe.IfExist(path, "pnpm-lock.yaml", []string{}, "pnpm", "outdated")
 		if err != nil {
 			errPath = append(errPath, path)
 		}
