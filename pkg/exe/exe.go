@@ -18,11 +18,11 @@ func Run(dir string, command string) error {
 		cmd = exec.Command("sh", "-c", command)
 	}
 	cmd.Dir = dir
-	errColor := color.BGGreen
-	fmt.Println(color.BGBlue, "执行", dir, command, color.Reset)
+	errColor := color.BgGreen
+	fmt.Println(color.BgBlue, "执行", dir, command, color.Reset)
 	out, err := cmd.CombinedOutput()
 	if err != nil {
-		errColor = color.BGRed
+		errColor = color.BgRed
 	}
 	fmt.Println(errColor, "完成", dir, command, color.Reset)
 	if err != nil {

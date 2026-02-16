@@ -8,7 +8,7 @@ import (
 )
 
 func run(path string) error {
-	fmt.Println(color.BGPurple, "尝试", path, color.Reset)
+	fmt.Println(color.BgPurple, "尝试", path, color.Reset)
 	if PathGit {
 		// git pull
 		exe.IfExist(path, ".git", "git pull")
