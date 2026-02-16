@@ -8,19 +8,19 @@ import (
 	"github.com/zichouu/go-pkg/color"
 )
 
-var PathGit = true
-var PathPnpm = true
+var CanUseList = []string{}
 
 func check() {
-	if _, err := exec.LookPath("git"); err != nil {
-		PathGit = false
-		fmt.Println(color.BgRed, err, color.Reset)
+	checkList := []string{"git", "pnpm"}
+	for _, v := range checkList {
+		_, err := exec.LookPath(v)
+		if err != nil {
+			fmt.Println(color.BgRed, err, color.Reset)
+		} else {
+			CanUseList = append(CanUseList, v)
+		}
 	}
-	if _, err := exec.LookPath("pnpm"); err != nil {
-		PathPnpm = false
-		fmt.Println(color.BgRed, err, color.Reset)
-	}
-	if !PathGit && !PathPnpm {
+	if len(CanUseList) == 0 {
 		os.Exit(1)
 	}
 }

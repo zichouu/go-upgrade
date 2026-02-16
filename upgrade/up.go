@@ -10,24 +10,20 @@ var errPath []string
 
 func up() {
 	var g errgroup.Group
-	var upPath []string
-	upErr := true
 	if len(errPath) > 0 {
+		var upPath []string
 		err := huh.NewMultiSelect[string]().
 			Title("pnpm up --latest ?").
 			Options(huh.NewOptions(errPath...)...).
 			Value(&upPath).
 			Run()
-		if err != nil {
-			upErr = false
-		}
-	}
-	if len(upPath) > 0 && upErr {
-		for _, value := range upPath {
-			g.Go(func() error {
-				exe.Run(value, []string{}, "pnpm", "up", "--latest")
-				return nil
-			})
+		if len(upPath) > 0 && err == nil {
+			for _, v := range upPath {
+				g.Go(func() error {
+					exe.Run(v, []string{}, "pnpm", "up", "--latest")
+					return nil
+				})
+			}
 		}
 	}
 	g.Wait()

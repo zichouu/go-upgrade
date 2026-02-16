@@ -2,18 +2,19 @@ package main
 
 import (
 	"fmt"
+	"slices"
 
 	"github.com/zichouu/go-pkg/color"
 	"github.com/zichouu/go-pkg/exe"
 )
 
-func run(path string) error {
+func run(path string) {
 	fmt.Println(color.BgPurple, "尝试", path, color.Reset)
-	if PathGit {
+	if slices.Contains(CanUseList, "git") {
 		// git pull
 		exe.IfExist(path, ".git", []string{}, "git", "pull")
 	}
-	if PathPnpm {
+	if slices.Contains(CanUseList, "pnpm") {
 		// pnpm i
 		exe.IfExist(path, "pnpm-lock.yaml", []string{}, "pnpm", "i")
 		// pnpm outdated
@@ -22,5 +23,4 @@ func run(path string) error {
 			errPath = append(errPath, path)
 		}
 	}
-	return nil
 }
