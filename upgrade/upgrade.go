@@ -1,8 +1,8 @@
 package main
 
 import (
-	"fmt"
 	"io/fs"
+	"log/slog"
 	"os"
 	"path/filepath"
 	"slices"
@@ -25,9 +25,9 @@ func main() {
 		root = os.Args[1]
 	}
 	var g errgroup.Group
-	filepath.WalkDir(root, func(path string, d fs.DirEntry, err error) error {
+	err = filepath.WalkDir(root, func(path string, d fs.DirEntry, err error) error {
 		if err != nil {
-			fmt.Println(err)
+			return err
 		}
 		if d.IsDir() {
 			// run() 前跳过某些目录 确定是无效目录
@@ -48,7 +48,10 @@ func main() {
 		}
 		return nil
 	})
-	g.Wait()
+	if err != nil {
+		slog.Error("WalkDir err", "err", err)
+	}
+	_ = g.Wait()
 	// pnpm up --latest
 	up()
 }
