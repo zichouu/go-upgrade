@@ -20,7 +20,7 @@ func up() {
 		if len(upPath) > 0 && err == nil {
 			for _, v := range upPath {
 				g.Go(func() error {
-					_ = exe.Run(v, []string{}, "pnpm", "up", "--latest")
+					_, _ = exe.Run(v, []string{}, "pnpm", "up", "--latest")
 					return nil
 				})
 			}
