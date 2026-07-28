@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"slices"
 	"strings"
 
@@ -18,14 +19,19 @@ func run(path string) {
 			if slices.Contains(CanUseList, "pnpm") {
 				// pnpm i
 				_, _ = exe.IfExist(path, "pnpm-lock.yaml", []string{}, "pnpm", "i")
-				// pnpm outdated
-				out, err := exe.IfExist(path, "pnpm-lock.yaml", []string{}, "pnpm", "outdated")
-				outString := string(out)
-				isOutDated := strings.Contains(outString, "Package") &&
-					strings.Contains(outString, "Current") &&
-					strings.Contains(outString, "Latest")
-				if err != nil && isOutDated {
-					errPath = append(errPath, path)
+				if len(os.Args) >= 3 {
+					args2 := os.Args[2:]
+					// pnpm outdated
+					if slices.Contains(args2, "up") {
+						out, err := exe.IfExist(path, "pnpm-lock.yaml", []string{}, "pnpm", "outdated")
+						outString := string(out)
+						isOutDated := strings.Contains(outString, "Package") &&
+							strings.Contains(outString, "Current") &&
+							strings.Contains(outString, "Latest")
+						if err != nil && isOutDated {
+							errPath = append(errPath, path)
+						}
+					}
 				}
 			}
 		}
